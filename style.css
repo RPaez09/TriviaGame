@@ -1,0 +1,39 @@
+body {
+    font-family: 'Raleway', sans-serif;
+    box-sizing: border-box;
+}
+
+/** Header **/
+.header {
+    width: 100%;
+    background-color: #1b5e20;
+    height: 50px;
+}
+
+.header h2 {
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 50px;
+}
+
+/** Main Game **/
+.game {
+    padding: 50px 30px;
+}
+
+/** Footer **/
+.footer {
+    min-height: 150px;
+    width: 100%;
+    background-color: #003300;
+}
+
+.footer h1 {
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 150px;
+}
