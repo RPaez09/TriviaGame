@@ -21,6 +21,50 @@ body {
 /** Main Game **/
 .game {
     padding: 50px 30px;
+    position: relative;
+    min-height: 560px;
+}
+
+.screen {
+    visibility: hidden;
+    min-height: 500px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding: 30px;
+    position: relative;
+}
+
+.screen h2 {
+    font-weight: bold;
+    text-align: center;
+    font-size: 26px;
+}
+
+.screen.intro-screen p{
+    margin-top: 30px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    background-color: #1b5e20;
+    color: #FFFFFF;
+    padding: 10px 15px;
+    transition: box-shadow .2s ease-out;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button.continue {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+}
+
+.button:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 /** Footer **/
