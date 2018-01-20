@@ -2,11 +2,14 @@ let game = {
 
 
     start : function(){
-        introScreen.open();
+        introScreen.run();
     }
 };
 
 let introScreen = new Screen( $('.intro-screen') , function(){
+
+    this.open();
+
     console.log('Intro screen running!');
 } );
 
@@ -17,18 +20,34 @@ function Screen ( element , run ){
 
 Screen.prototype.open = function(){
 
-    TweenLite.from( this.element, .5, 
+    let element = this.element;
+
+    TweenMax.set( element , { display: "inherit" });
+
+    TweenMax.from( element, .5, 
         {
             top:"50px", 
             autoAlpha: 0,
             delay: .5,
-            easing: "easeOut"
+            ease: "easeOut"
         });
-
 }
 
 Screen.prototype.close = function(){
-    // Closing animation
+    
+    let element = this.element;
+
+    TweenMax.to( element, .5, 
+        {
+            top:"50px", 
+            autoAlpha: 0,
+            delay: .5,
+            ease: "easeOut",
+            onComplete: function(){
+                TweenMax.set( element , { display: "none" });
+            }
+        });
+        
 }
 
 game.start();

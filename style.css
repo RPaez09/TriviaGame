@@ -26,6 +26,7 @@ body {
 }
 
 .screen {
+    display: none;
     visibility: hidden;
     min-height: 500px;
     width: 90%;
