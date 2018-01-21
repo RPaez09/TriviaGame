@@ -10,7 +10,23 @@ let introScreen = new Screen( $('.intro-screen') , function(){
 
     this.open();
 
-    console.log('Intro screen running!');
+    $('.continue').on("click" , function(){
+        
+        introScreen.close();
+        
+        $('.continue').off("click");
+
+        q1Screen.run();
+
+    });
+} );
+
+let q1Screen = new Screen( $('.q1-screen') , function(){
+
+    this.open();
+
+    console.log('q1 running!');
+
 } );
 
 function Screen ( element , run ){
