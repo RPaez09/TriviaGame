@@ -12,11 +12,9 @@ let introScreen = new Screen( $('.intro-screen') , function(){
 
     $('.continue').on("click" , function(){
         
-        introScreen.close();
+        introScreen.transitionTo( q1Screen );
         
         $('.continue').off("click");
-
-        q1Screen.run();
 
     });
 } );
@@ -49,7 +47,7 @@ Screen.prototype.open = function(){
         });
 }
 
-Screen.prototype.close = function(){
+Screen.prototype.transitionTo = function( next ){
     
     let element = this.element;
 
@@ -61,6 +59,8 @@ Screen.prototype.close = function(){
             ease: "easeOut",
             onComplete: function(){
                 TweenMax.set( element , { display: "none" });
+
+                next.run();
             }
         });
         
