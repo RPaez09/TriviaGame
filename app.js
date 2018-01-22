@@ -1,5 +1,29 @@
 let game = {
 
+    currentQuestion : 0,
+
+    questions: [
+        {
+            name : "The greenway spans how many paved miles:",
+            choices : [ "11.3" , "17.8" , "25.7" , "33" ],
+            correctIndex : 3
+        },
+        {
+            name : "Which of the following towns does the greenway not connect to:",
+            choices : [ "Wendell" , "Knightdale" , "Wake Forest" , "Clayton" ],
+            correctIndex : 0
+        },
+        {
+            name : "The greenway is considered a small part of which longer trail:",
+            choices : [ "Tanawha Trail" , "Mountains-To-Sea Trail" , "Sauratown Trail" , "Haw River Trail" ],
+            correctIndex : 1
+        },
+        {
+            name : "When did the Raleigh city adopt the Capital Areal Greenway System plan:",
+            choices : [ "1992" , "1985" , "1976" , "1969" ],
+            correctIndex : 2
+        }
+    ],
 
     start : function(){
         introScreen.run();
@@ -12,14 +36,14 @@ let introScreen = new Screen( $('.intro-screen') , function(){
 
     $('.continue').on("click" , function(){
         
-        introScreen.transitionTo( q1Screen );
+        introScreen.transitionTo( questionScreen );
         
         $('.continue').off("click");
 
     });
 } );
 
-let q1Screen = new Screen( $('.q1-screen') , function(){
+let questionScreen = new Screen( $('.question-screen') , function(){
 
     this.open();
 
