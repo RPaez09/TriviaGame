@@ -1,6 +1,7 @@
 let game = {
 
     currentQuestion : 0,
+    currentAnswerChoice : 0,
 
     questions: [
         {
@@ -52,12 +53,28 @@ let questionScreen = new Screen( $('.question-screen') , function(){
     let answerHTML = "";
 
     for( var i = 0; i < game.questions[ game.currentQuestion ].choices.length; i++ ){
-        answerHTML  += "<div class='answer-choice'>" + game.questions[ game.currentQuestion ].choices[ i ] +"</div>";
+        answerHTML  += "<div class='button answer-choice' data-index='" + i + "'>" + game.questions[ game.currentQuestion ].choices[ i ] +"</div>";
     }
 
     $('.answer-wrapper').html( answerHTML );
 
+    this.open(); // transition this screen into view
+
+    $('.answer-choice').on('click' , function(){ //event for submitting your answer
+
+        $('.answer-choice').off('click'); // remove this event
+
+        game.currentAnswerChoice = $(this).attr('data-index'); // the user submitted answer
+
+        questionScreen.transitionTo( answerScreen );
+    })
+
+} );
+
+let answerScreen = new Screen( $('.answer-screen') , function(){
+    
     this.open();
+    console.log("Answer Screen running");
 
 } );
 
