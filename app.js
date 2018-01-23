@@ -97,7 +97,9 @@ let answerScreen = new Screen( $('.answer-screen') , function(){
 
     continueBtn.on( 'click' , function(){
         console.log("Clicked");
-        //TODO: handle this click and continue the app flow.
+        game.currentQuestion++;
+        
+        answerScreen.transitionTo( questionScreen );
     } );
 
 } );
@@ -111,12 +113,12 @@ Screen.prototype.open = function(){
 
     let element = this.element;
 
-    TweenMax.set( element , { display: "inherit" });
+    TweenMax.set( element , { display: "block" });
 
-    TweenMax.from( element, .5, 
+    TweenMax.to( element, .5, 
         {
-            top:"50px", 
-            autoAlpha: 0,
+            top:"0", 
+            autoAlpha: 1,
             delay: .5,
             ease: "easeOut"
         });
