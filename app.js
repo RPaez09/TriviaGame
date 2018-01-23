@@ -64,7 +64,7 @@ let questionScreen = new Screen( $('.question-screen') , function(){
 
         $('.answer-choice').off('click'); // remove this event
 
-        game.currentAnswerChoice = $(this).attr('data-index'); // the user submitted answer
+        game.currentAnswerChoice = parseInt( $(this).attr('data-index') ); // the user submitted answer
 
         questionScreen.transitionTo( answerScreen );
     })
@@ -73,8 +73,32 @@ let questionScreen = new Screen( $('.question-screen') , function(){
 
 let answerScreen = new Screen( $('.answer-screen') , function(){
     
+    this.element.html(""); // flush the html to regenerate this page
+
+    let status = $("<h2></h2>"); // using the proper method to create html elements thank you very much
+    status.addClass("answer-status");
+
+    // check if the last answer was correct of not
+    if( game.currentAnswerChoice === game.questions[ game.currentQuestion ].correctIndex ){
+        status.html("You've got the right answer");
+    } else {
+        status.html("Sorry, Wrong answer");
+    }
+
+    this.element.append( status );
+
+    //now for the continue button
+    let continueBtn = $("<div></div>");
+    continueBtn.addClass("button continue");
+    continueBtn.html("Continue");
+    this.element.append( continueBtn );
+
     this.open();
-    console.log("Answer Screen running");
+
+    continueBtn.on( 'click' , function(){
+        console.log("Clicked");
+        //TODO: handle this click and continue the app flow.
+    } );
 
 } );
 
