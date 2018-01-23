@@ -45,9 +45,19 @@ let introScreen = new Screen( $('.intro-screen') , function(){
 
 let questionScreen = new Screen( $('.question-screen') , function(){
 
-    this.open();
+    // first populate question and choices...
+    $('.question-name').html( game.questions[ game.currentQuestion ].name );
 
-    console.log('q1 running!');
+    //now render answer choices
+    let answerHTML = "";
+
+    for( var i = 0; i < game.questions[ game.currentQuestion ].choices.length; i++ ){
+        answerHTML  += "<div class='answer-choice'>" + game.questions[ game.currentQuestion ].choices[ i ] +"</div>";
+    }
+
+    $('.answer-wrapper').html( answerHTML );
+
+    this.open();
 
 } );
 
