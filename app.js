@@ -96,13 +96,28 @@ let answerScreen = new Screen( $('.answer-screen') , function(){
     this.open();
 
     continueBtn.on( 'click' , function(){
-        console.log("Clicked");
-        game.currentQuestion++;
-        
-        answerScreen.transitionTo( questionScreen );
-    } );
 
+        continueBtn.off( 'click' );
+        
+        game.currentQuestion++;
+
+        if( game.currentQuestion === game.questions.length ){ // if last question is answered
+            answerScreen.transitionTo( conclusionScreen ); //conclude the survey
+        } else {
+            answerScreen.transitionTo( questionScreen ); // loop back to another question
+        }
+    } );
 } );
+
+let conclusionScreen = new Screen( $('.conclusion-screen') , function(){
+    
+    let conclusionHeader = $('<h2></h2>');
+    conclusionHeader.html("Thank you for taking the quiz!");
+    this.element.append( conclusionHeader );
+
+    this.open();
+
+});
 
 function Screen ( element , run ){
     this.element = element;
@@ -140,7 +155,6 @@ Screen.prototype.transitionTo = function( next ){
                 next.run();
             }
         });
-        
 }
 
 game.start();
