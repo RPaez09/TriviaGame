@@ -2,6 +2,7 @@ let game = {
 
     currentQuestion : 0,
     currentAnswerChoice : 0,
+    timedOut : false,
 
     questions: [
         {
@@ -60,9 +61,17 @@ let questionScreen = new Screen( $('.question-screen') , function(){
 
     this.open(); // transition this screen into view
 
+    let timedOut = setTimeout( function(){ // start the timer
+
+        game.timedOut = true;
+        questionScreen.transitionTo( answerScreen );
+
+    } , 10000);
+
     $('.answer-choice').on('click' , function(){ //event for submitting your answer
 
         $('.answer-choice').off('click'); // remove this event
+        clearTimeout( timedOut ); // remove the timer
 
         game.currentAnswerChoice = parseInt( $(this).attr('data-index') ); // the user submitted answer
 
@@ -78,11 +87,16 @@ let answerScreen = new Screen( $('.answer-screen') , function(){
     let status = $("<h2></h2>"); // using the proper method to create html elements thank you very much
     status.addClass("answer-status");
 
-    // check if the last answer was correct of not
-    if( game.currentAnswerChoice === game.questions[ game.currentQuestion ].correctIndex ){
-        status.html("You've got the right answer");
+    // check if you ran out of time in that last question
+    if( game.timedOut === false ){
+        // check if the last answer was correct of not
+        if( game.currentAnswerChoice === game.questions[ game.currentQuestion ].correctIndex ){
+            status.html("You've got the right answer");
+        } else {
+            status.html("Sorry, Wrong answer");
+        }
     } else {
-        status.html("Sorry, Wrong answer");
+        status.html("Looks like you ran out of time, Sorry");
     }
 
     this.element.append( status );
@@ -99,6 +113,7 @@ let answerScreen = new Screen( $('.answer-screen') , function(){
 
         continueBtn.off( 'click' );
         
+        game.timedOut = false;
         game.currentQuestion++;
 
         if( game.currentQuestion === game.questions.length ){ // if last question is answered
