@@ -77,10 +77,11 @@ let questionScreen = new Screen( $('.question-screen') , function(){
         game.timedOut = true;
         questionScreen.transitionTo( answerScreen );
 
-    } , 15000);
+    } , 16000);
 
     TweenMax.to( $('.timer-fill'), 15 , 
     {
+        delay: .8,
         width: '0%',
         backgroundColor: '#d50000',
         ease: 'linear'
