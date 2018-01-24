@@ -47,6 +47,10 @@ let introScreen = new Screen( $('.intro-screen') , function(){
 
 let questionScreen = new Screen( $('.question-screen') , function(){
 
+    //flush the html
+    this.element.html("<h2 class='question-name'></h2><div class='answer-wrapper'></div>")
+
+
     // first populate question and choices...
     $('.question-name').html( game.questions[ game.currentQuestion ].name );
 
@@ -59,6 +63,13 @@ let questionScreen = new Screen( $('.question-screen') , function(){
 
     $('.answer-wrapper').html( answerHTML );
 
+    // creating the timer
+    let timerWrapper = $('<div></div>');
+    timerWrapper.addClass('timer-wrapper');
+    timerWrapper.html("<p class='timer-label'>Time Remaining:</p> <div class='timer-bar'> <div class='timer-fill'></div></div>");
+
+    this.element.append( timerWrapper );
+
     this.open(); // transition this screen into view
 
     let timedOut = setTimeout( function(){ // start the timer
@@ -66,7 +77,14 @@ let questionScreen = new Screen( $('.question-screen') , function(){
         game.timedOut = true;
         questionScreen.transitionTo( answerScreen );
 
-    } , 10000);
+    } , 15000);
+
+    TweenMax.to( $('.timer-fill'), 15 , 
+    {
+        width: '0%',
+        backgroundColor: '#d50000',
+        ease: 'linear'
+    } );
 
     $('.answer-choice').on('click' , function(){ //event for submitting your answer
 
