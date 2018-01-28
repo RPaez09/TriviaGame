@@ -1,6 +1,7 @@
 body {
     font-family: 'Raleway', sans-serif;
     box-sizing: border-box;
+    background-color: #003300;
 }
 
 /** Header **/
@@ -23,6 +24,7 @@ body {
     padding: 50px 30px;
     position: relative;
     min-height: 560px;
+    background-color: #FFFFFF;
 }
 
 .screen {
